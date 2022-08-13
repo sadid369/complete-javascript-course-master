@@ -26,4 +26,66 @@ const restaurant = {
       close: 24,
     },
   },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(starterIndex, mainIndex, time, address);
+  },
 };
+
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+console.log(restaurantName, hours, tags);
+
+const { manu = [], starterMenu: starters = [] } = restaurant;
+console.log(manu, starters);
+
+let a = 111;
+let b = 999;
+
+const obj = { a: 23, b: 7, c: 14 };
+({ a, b } = obj);
+console.log(a, b);
+
+const {
+  fri: { open: o, close: c },
+} = openingHours;
+console.log(o, c);
+
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Barisal',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+restaurant.orderDelivery({
+  address: 'Barisal',
+});
+// const arr = [2, 3, 4];
+
+// const [x, y, z] = arr;
+// console.log(x, y, z);
+// console.log(arr);
+
+// let [main, , second] = restaurant.categories;
+// console.log(main, second);
+// [main, second] = [second, main];
+// console.log(main, second);
+
+// const [strater, mainCourse] = restaurant.order(2, 0);
+// console.log(strater, mainCourse);
+
+// const nested = [2, 4, [5, 6]];
+// const [i, , [j, k]] = nested;
+// console.log(i, j, k);
