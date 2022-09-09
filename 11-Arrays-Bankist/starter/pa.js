@@ -46,3 +46,35 @@ const movementDes = movements.map((mov, i, arr) => {
   }
 });
 console.log(movementDes);
+
+const user = 'Steven Thomas Williams';
+const username = user
+  .toLowerCase()
+  .split(' ')
+  .map(name => name[0])
+  .join('');
+console.log(username);
+
+const withdrawals = movements.filter(function (mox) {
+  return mox < 0;
+});
+console.log(withdrawals);
+
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  console.log(`iteration ${i} ${acc}`);
+  return acc + cur;
+}, 0);
+console.log(balance);
+
+const max = movements.reduce(function (acc, mov, i, arr) {
+  if (acc > mov) {
+    console.log(`${i}: acc : ${acc} mov: ${mov}`);
+    console.log(`${i}: acc : ${acc}`);
+    return acc;
+  } else {
+    console.log(`${i}: acc : ${acc} mov: ${mov}`);
+    console.log(`${i}: mov : ${mov}`);
+    return mov;
+  }
+}, 300);
+console.log(max);

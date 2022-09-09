@@ -74,3 +74,21 @@ const displayMovement = function (movements) {
   });
 };
 displayMovement(account1.movements);
+const caleDisplayBalance = function (movements) {
+  const balance = movements.reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
+caleDisplayBalance(account1.movements);
