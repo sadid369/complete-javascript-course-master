@@ -45,7 +45,7 @@ const movementDes = movements.map((mov, i, arr) => {
     return `Movement ${i + 1}: You withdraw ${Math.abs(mov)}`;
   }
 });
-console.log(movementDes);
+// consoleclear.log(movementDes);
 
 const user = 'Steven Thomas Williams';
 const username = user
@@ -53,18 +53,18 @@ const username = user
   .split(' ')
   .map(name => name[0])
   .join('');
-console.log(username);
+// console.log(username);
 
 const withdrawals = movements.filter(function (mox) {
   return mox < 0;
 });
-console.log(withdrawals);
+// console.log(withdrawals);
 
 const balance = movements.reduce(function (acc, cur, i, arr) {
   console.log(`iteration ${i} ${acc}`);
   return acc + cur;
 }, 0);
-console.log(balance);
+// console.log(balance);
 
 const max = movements.reduce(function (acc, mov, i, arr) {
   if (acc > mov) {
@@ -77,4 +77,41 @@ const max = movements.reduce(function (acc, mov, i, arr) {
     return mov;
   }
 }, 300);
-console.log(max);
+// console.log(max);
+
+const firstWithdrawal = movements.find((mov, i, arr) => {
+  console.log(arr);
+  return mov < 0;
+});
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
