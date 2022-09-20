@@ -115,3 +115,28 @@ const accounts = [account1, account2, account3, account4];
 
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
+
+console.log(movements);
+console.log(movements.includes(-130));
+const anyDeposit = movements.some(mov => mov > 5000);
+console.log(anyDeposit);
+
+// EVERY
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+const arrDeep = [[[1, 2], 3], [[4, 5], 6], 7, 8];
+console.log(arrDeep.flat(2));
+
+const accountMovement = accounts.map(acc => acc.movements);
+console.log(accountMovement);
+const allMovements = accountMovement.flat();
+console.log(allMovements);
+const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+const arr1 = [1, 2, 3];
+const arr3 = Array.from(arr1);
+console.log(arr3);
