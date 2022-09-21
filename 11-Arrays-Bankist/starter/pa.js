@@ -140,3 +140,7 @@ console.log(overalBalance);
 const arr1 = [1, 2, 3];
 const arr3 = Array.from(arr1);
 console.log(arr3);
+
+const bankDepositSum = accounts.map(acc => acc.movements);
+
+console.log(bankDepositSum);
