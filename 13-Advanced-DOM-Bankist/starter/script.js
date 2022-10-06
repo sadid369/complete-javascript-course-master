@@ -28,6 +28,8 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+/*
+
 ////////////////////////
 // Selecting Elements
 console.log(document.documentElement);
@@ -97,3 +99,29 @@ logo.classList.contains('c');
 // don't use this
 // this override all exiting classes and add only this class
 logo.className = 'sadid';
+*/
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log(e.target.getBoundingClientRect());
+  console.log(
+    `Current Scroll X: ${window.pageXOffset} Y: ${window.pageYOffset}`
+  );
+  console.log(
+    `viewport Height: ${document.documentElement.clientHeight} Width: ${document.documentElement.clientWidth}`
+  );
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+  window.scrollTo({
+    left: s1coords.left + window.pageXOffset,
+
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth',
+  });
+});
