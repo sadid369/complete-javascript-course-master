@@ -1,12 +1,12 @@
 'use strict';
-
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -28,8 +28,56 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
-/*
+//////////////////////////
+// Button scrolling
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log(e.target.getBoundingClientRect());
+  console.log(
+    `Current Scroll X: ${window.pageXOffset} Y: ${window.pageYOffset}`
+  );
+  console.log(
+    `viewport Height: ${document.documentElement.clientHeight} Width: ${document.documentElement.clientWidth}`
+  );
 
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+//Page Navigation
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  // Matching Strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+//////////////////////////////
+////////////////////////////
+//////////////////////////
+/*
 ////////////////////////
 // Selecting Elements
 console.log(document.documentElement);
@@ -99,7 +147,7 @@ logo.classList.contains('c');
 // don't use this
 // this override all exiting classes and add only this class
 logo.className = 'sadid';
-*/
+
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
@@ -118,10 +166,67 @@ btnScrollTo.addEventListener('click', function (e) {
   //   s1coords.left + window.pageXOffset,
   //   s1coords.top + window.pageYOffset
   // );
-  window.scrollTo({
-    left: s1coords.left + window.pageXOffset,
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
 
-    top: s1coords.top + window.pageYOffset,
-    behavior: 'smooth',
-  });
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+const alertH1 = function (e) {
+  alert('you touch Heading');
+};
+const h1 = document.querySelector('h1');
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+h1.addEventListener('mouseenter', alertH1);
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+console.log(randomColor());
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('link', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
+  // Stop propagation
+  // e.stopPropagation();
+});
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('container', e.target, e.currentTarget);
+});
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('nav', e.target, e.currentTarget);
+});
+*/
+const h1 = document.querySelector('h1');
+
+// Going downwards: Child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+//Going upwards: parents
+
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+
+// Going sideways: sibling
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) {
+    el.style.transform = 'scale(0.5)';
+  }
 });
