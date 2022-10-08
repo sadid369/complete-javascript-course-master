@@ -74,6 +74,8 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
+//Tabbed Component
+
 //////////////////////////////
 ////////////////////////////
 //////////////////////////
@@ -201,7 +203,7 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('nav', e.target, e.currentTarget);
 });
-*/
+
 const h1 = document.querySelector('h1');
 
 // Going downwards: Child
@@ -230,3 +232,4 @@ console.log(h1.parentElement.children);
     el.style.transform = 'scale(0.5)';
   }
 });
+*/
