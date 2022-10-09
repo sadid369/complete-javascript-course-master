@@ -75,6 +75,25 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 //Tabbed Component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabContainer = document.querySelector('.operations__tab-container');
+const tabContent = document.querySelectorAll('.operations__content ');
+// tabs.forEach(t => t.addEventListener('click', () => console.log('tab')));
+tabContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  //Guard clause
+  if (!clicked) return;
+  // Active Tab
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabContent.forEach(c => c.classList.remove('operations__content--active'));
+  clicked.classList.add('operations__tab--active');
+  // Active Content Area
+
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
 
 //////////////////////////////
 ////////////////////////////
