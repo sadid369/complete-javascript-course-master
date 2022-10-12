@@ -114,15 +114,25 @@ const handleHover = function (e) {
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 //sticky navigation
-const initialCoords = section1.getBoundingClientRect();
-console.log(initialCoords);
-window.addEventListener('scroll', function () {
-  if (window.scrollY > initialCoords.top) {
-    nav.classList.add('sticky');
-  } else {
-    nav.classList.remove('sticky');
-  }
-});
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
+// window.addEventListener('scroll', function () {
+//   if (window.scrollY > initialCoords.top) {
+//     nav.classList.add('sticky');
+//   } else {
+//     nav.classList.remove('sticky');
+//   }
+// });
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => console.log(entry));
+};
+const obsOption = {
+  root: null,
+  threshold: [0, 0.2],
+};
+const observer = new IntersectionObserver(obsCallback, obsOption);
+observer.observe(section1);
+
 //////////////////////////////
 ////////////////////////////
 //////////////////////////
