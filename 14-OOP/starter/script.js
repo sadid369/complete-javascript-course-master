@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 const Person = function (firstName, birthYear) {
   // Instance properties
   this.firstName = firstName;
@@ -52,3 +52,87 @@ console.log(sadid.hasOwnProperty('species'));
 console.log(sadid.__proto__.__proto__);
 console.log(sadid.__proto__.__proto__.__proto__);
 console.dir(Person.prototype.constructor);
+
+
+const Car = function (speed) {
+  this.speed = speed;
+};
+Car.prototype.accelerate = function () {
+  this.speed = this.speed + 10;
+  console.log(this.speed);
+};
+Car.prototype.break = function () {
+  this.speed = this.speed - 5;
+  console.log(this.speed);
+};
+
+const bmw = new Car(120);
+const mercedes = new Car(95);
+bmw.accelerate();
+bmw.break();
+mercedes.accelerate();
+mercedes.break();
+
+*/
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+  get age() {
+    return 2037 - this.birthYear;
+  }
+  set fullName(name) {
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      alert(`${name} is not full name`);
+    }
+  }
+  get fullName() {
+    return this._fullName;
+  }
+  static hey() {
+    console.log('Hey Therererererere');
+    console.log(this);
+  }
+}
+
+const sadid = new PersonCl('Sadid M', 1992);
+sadid.calcAge();
+
+sadid.greet();
+
+const account = {
+  owner: 'sadid',
+  movements: [200, 53, 120, 300],
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+console.log(account.latest);
+
+account.latest = 50;
+console.log(account.movements);
+
+const walter = new PersonCl('Waletr White', 1965);
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.hey = function () {
+  console.log('Hey There ✋🏽');
+};
+
+Person.hey();
+PersonCl.hey();
