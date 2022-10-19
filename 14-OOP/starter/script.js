@@ -73,7 +73,7 @@ bmw.break();
 mercedes.accelerate();
 mercedes.break();
 
-*/
+
 class PersonCl {
   constructor(fullName, birthYear) {
     this.fullName = fullName;
@@ -136,3 +136,56 @@ Person.hey = function () {
 
 Person.hey();
 PersonCl.hey();
+
+class Car {
+  constructor(speed) {
+    this.speed = speed;
+  }
+  // set speedUS(speed) {
+  //   this._speed = speed * 1.6;
+  // }
+  accelerate() {
+    this.speed = this.speed + 10;
+    console.log(this.speed);
+  }
+  break() {
+    this.speed = this.speed - 5;
+    console.log(this.speed);
+  }
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+const car1 = new Car(120);
+console.log(car1.speedUS);
+car1.speedUS = 50;
+car1.accelerate();
+car1.break();
+*/
+
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My Name is ${this.firstName} and I study ${this.course} `);
+};
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce();
+mike.calcAge();
