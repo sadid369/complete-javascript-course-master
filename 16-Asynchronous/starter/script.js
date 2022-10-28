@@ -81,7 +81,24 @@ const getCountryAndNeighbour = function (country, currency, languages) {
     });
   });
 };
-getCountryAndNeighbour('USA', 'USD', 'eng');
+// getCountryAndNeighbour('USA', 'USD', 'eng');
 
 // getCountryData('USA', 'USD', 'eng');
 // getCountryData('bangladesh', 'BDT', 'ben');
+// const getCountryData = function (country, currency, languages) {
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(function (response) {
+//       console.log(response);
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       renderCountry(data[0], currency, languages);
+//     });
+// };
+const getCountryData = function (country, currency, languages) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCountry(data[0], currency, languages));
+};
+getCountryData('USA', 'USD', 'eng');
