@@ -166,3 +166,15 @@ const getCountryData = function (country, currency, languages) {
 btn.addEventListener('click', function () {
   getCountryData('USA', 'USD', 'eng');
 });
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition().then(pos => console.log(pos));
