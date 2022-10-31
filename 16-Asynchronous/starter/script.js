@@ -36,7 +36,7 @@ const countriesContainer = document.querySelector('.countries');
 ///////////////////////////////////////
 const renderError = function (msg) {
   countriesContainer.insertAdjacentHTML('beforeend', msg);
-  // countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 const renderCountry = function (data, currency, languages, className = '') {
   const html = `
@@ -58,7 +58,7 @@ const renderCountry = function (data, currency, languages, className = '') {
         </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  // countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 const getCountryAndNeighbour = function (country, currency, languages) {
   // AJAX call country 1
@@ -139,6 +139,7 @@ const getJSON = function (url, errorMsg = 'Something Went Wrong') {
 //       countriesContainer.style.opacity = 1;
 //     });
 // };
+/*
 const getCountryData = function (country, currency, languages) {
   getJSON(`https://restcountries.com/v3.1/name/${country}`, 'Country not found')
     .then(data => {
@@ -178,3 +179,51 @@ const getPosition = function () {
 };
 
 getPosition().then(pos => console.log(pos));
+*/
+const getPosition = function (country) {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function (country) {
+  try {
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+    // console.log(lat, lng);
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?json=1`);
+    if (!resGeo.success) throw new Error('Problem getting location Data');
+    const dataGeo = await resGeo.json();
+    // console.log(dataGeo);
+
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${dataGeo.country}`
+    );
+    if (res.status == 404) throw new Error('Problem getting Country Data');
+    const data = await res.json();
+    // console.log(data);
+    renderCountry(data[0], 'BDT', 'ben', 'neighbour');
+    return `continents : ${data[0].region}`;
+  } catch (err) {
+    // console.log(err);
+    renderError(`💥💥💥 ${err.message}`);
+    throw err;
+  }
+};
+
+// whereAmI('portugal')
+//   .then(region => console.log(`2: ${region}`))
+//   .catch(err => console.error(`2: ${err.message}`))
+//   .finally(() => console.log('3: FINISHED'));
+// console.log(continents);
+
+console.log(' 1: FIRST');
+(async function () {
+  try {
+    const region = await whereAmI('');
+    console.log(region);
+  } catch (err) {
+    console.error(`2: ${err.message}`);
+  }
+  console.log('3: FINISHED');
+})();
